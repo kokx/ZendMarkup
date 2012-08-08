@@ -74,13 +74,33 @@ class Bbcode implements ParserInterface
     /**
      * Get the next token.
      *
-     * @return array
+     * @return array The requested token, or null if it doesn't exist
      */
     public function getNext()
     {
         if (isset($this->tokens[$this->lastToken])) {
             return $this->tokens[$this->lastToken++];
         }
+        return null;
+    }
+
+    /**
+     * Look one or more tokens ahead.
+     *
+     * @param string $num Number of tokens to look ahead, defaults to 1.
+     *
+     * @return array The requested token, or null if it doesn't exist
+     */
+    public function lookAhead($num = 1)
+    {
+        // first decrease the number by one, since we do a lookahead from the
+        // last position, which we increased on the last call of getNext()
+        $num--;
+
+        if (isset($this->tokens[$this->lastToken + $num])) {
+            return $this->tokens[$this->lastToken + $num];
+        }
+
         return null;
     }
 
