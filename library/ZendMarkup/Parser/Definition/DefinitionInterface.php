@@ -11,6 +11,7 @@
 namespace ZendMarkup\Parser\Definition;
 
 use ZendMarkup\Parser\ParserInterface;
+use ZendMarkup\TreeNode;
 
 interface DefinitionInterface
 {
