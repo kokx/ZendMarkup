@@ -62,7 +62,7 @@ class Bbcode implements ParserInterface
         $this->tokens = $lexer->tokenize($value);
         $this->lastToken = 0;
 
-        $tree = new TreeNode('');
+        $tree = new TreeNode(TreeNode::TYPE_TEXT, '');
 
         while (null !== ($token = $this->getNext())) {
             $tree->addChild($this->parseToken($token, $tree));
@@ -120,7 +120,7 @@ class Bbcode implements ParserInterface
             }
         }
 
-        return new TreeNode($token[1]);
+        return new TreeNode(TreeNode::TYPE_TEXT, $token[1]);
     }
 
     /**

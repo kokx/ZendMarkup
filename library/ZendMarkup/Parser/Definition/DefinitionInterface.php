@@ -19,7 +19,9 @@ interface DefinitionInterface
     /**
      * Invoke the definition.
      *
+     * @param ParserInterface $parser
      * @param TreeNode $node
+     * @param array $token
      *
      * @return TreeNode
      */

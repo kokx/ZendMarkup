@@ -13,6 +13,11 @@ namespace ZendMarkup;
 class TreeNode
 {
 
+    // Types
+    const TYPE_TEXT = 'text';
+    const TYPE_MARKUP = 'markup';
+
+
     /**
      * Children.
      *
@@ -28,11 +33,39 @@ class TreeNode
     protected $parent;
 
     /**
+     * Name.
+     *
+     * @var string
+     */
+    protected $name;
+
+    /**
+     * Type
+     *
+     * @var string
+     */
+    protected $type;
+
+    /**
+     * Attributes.
+     *
+     * @var array
+     */
+    protected $attributes = array();
+
+    /**
      * Content.
      *
      * @var string
      */
-    protected $content;
+    protected $content = '';
+
+    /**
+     * Content that comes after the children.
+     *
+     * @var string
+     */
+    protected $endContent = '';
 
 
     /**
@@ -40,9 +73,44 @@ class TreeNode
      *
      * @param string $content
      */
-    public function __construct($content)
+    public function __construct($type, $content, $name = '')
     {
+        $this->type = $type;
         $this->content = $content;
+        $this->name = $name;
+    }
+
+    /**
+     * Add an attribute.
+     *
+     * @param string $name
+     * @param string $value
+     */
+    public function addAttribute($name, $value)
+    {
+        $this->attributes[$name] = $value;
+    }
+
+    /**
+     * Add multiple attributes.
+     *
+     * @param array $attributes
+     */
+    public function addAttributes($attributes)
+    {
+        foreach ($attributes as $name => $value) {
+            $this->addAttribute($name, $value);
+        }
+    }
+
+    /**
+     * Set the end content.
+     *
+     * @param string $endContent
+     */
+    public function setEndContent($endContent)
+    {
+        $this->endContent = $endContent;
     }
 
     /**
